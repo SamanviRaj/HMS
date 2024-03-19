@@ -1,7 +1,7 @@
 # HMS
 Hotel Management System (HMS)
 
-config server 
+config server  - https://github.com/SamanviRaj/config-server
 -------------
 
 http://localhost:8888/guest-service/default
