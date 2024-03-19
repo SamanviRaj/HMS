@@ -1,0 +1,25 @@
+server:
+    port: 8761
+
+spring:
+  application:
+    name: service-registery
+
+eureka:
+  client:
+    registerWithEureka: false # Indicates whether this application instance should register itself with the Eureka server.
+    fetchRegistry: false # Indicates whether this application instance should fetch the registry information from the Eureka server.
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/ # The URL for the Eureka server's REST API.
+  server:
+    waitTimeInMsWhenSyncEmpty: 0 # The amount of time to wait, in milliseconds, before syncing with the peer Eureka nodes when the local registry is empty.
+    enableSelfPreservation: false # Indicates whether to enable self-preservation mode.
+    evictionIntervalTimerInMs: 60000 # The interval for the eviction task (in milliseconds) that removes instances from the registry.
+    responseCacheUpdateIntervalMs: 300000 # The interval for the response cache update task (in milliseconds).
+    registrySyncRetries: 3 # The number of retries for registry replication.
+    minAvailableInstancesRatio: 0.5 # The minimum ratio of available instances to total instances in order to be considered healthy.
+    disableDelta: false # Indicates whether delta updates are disabled.
+    maxThreadsForPeerReplication: 20 # The maximum number of threads for peer replication.
+    maxElementsInMemory: 10000 # The maximum number of elements in the in-memory replication cache.
+    useReadOnlyResponseCache: true # Indicates whether to use the response cache in read-only mode.
+
