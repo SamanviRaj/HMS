@@ -18,13 +18,11 @@ public class Reservation {
     @Column(name = "reservation_id")
     private Long id;
 
-   /* @ManyToOne
-    @JoinColumn(name = "guest_id", nullable = false)
-    private Guest guest;
+    @Column(name = "guest_id", nullable = false)
+    private Long guestId;
 
-    @ManyToOne
-    @JoinColumn(name = "room_id", nullable = false)
-    private Room room;*/
+    @Column(name = "room_id", nullable = false)
+    private Long roomId;
 
     @Column(name = "check_in_date", nullable = false)
     @Temporal(TemporalType.DATE)
