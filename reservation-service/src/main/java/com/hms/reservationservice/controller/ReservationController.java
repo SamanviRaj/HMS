@@ -1,5 +1,6 @@
 package com.hms.reservationservice.controller;
 
+import com.hms.reservationservice.dto.ReservationDTO;
 import com.hms.reservationservice.entity.Reservation;
 import com.hms.reservationservice.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,43 @@ public class ReservationController {
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
         Reservation createdReservation = reservationService.createReservation(reservation);
         return new ResponseEntity<>(createdReservation, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<ReservationDTO> saveReservation(@RequestBody ReservationDTO reservationDTO) {
+        // Convert ReservationDTO to Reservation entity
+        Reservation reservation = convertToReservationEntity(reservationDTO);
+
+        // Save the reservation
+        ReservationDTO savedReservation = reservationService.saveReservation(reservationDTO);
+
+
+        return new ResponseEntity<>(savedReservation, HttpStatus.CREATED);
+    }
+
+
+// Method to convert ReservationDTO to Reservation entity
+    private Reservation convertToReservationEntity(ReservationDTO reservationDTO) {
+        Reservation reservation = new Reservation();
+        reservation.setCheckInDate(reservationDTO.getCheckInDate());
+        reservation.setCheckOutDate(reservationDTO.getCheckOutDate());
+        reservation.setNumberOfGuests(reservationDTO.getNumberOfGuests());
+        reservation.setTotalPrice(reservationDTO.getTotalPrice());
+        reservation.setStatus(reservationDTO.getStatus());
+        // Populate other fields as needed
+        return reservation;
+    }
+
+    // Method to convert Reservation entity to ReservationDTO
+    private ReservationDTO convertToReservationDTO(Reservation reservation) {
+        ReservationDTO reservationDTO = new ReservationDTO();
+        reservationDTO.setCheckInDate(reservation.getCheckInDate());
+        reservationDTO.setCheckOutDate(reservation.getCheckOutDate());
+        reservationDTO.setNumberOfGuests(reservation.getNumberOfGuests());
+        reservationDTO.setTotalPrice(reservation.getTotalPrice());
+        reservationDTO.setStatus(reservation.getStatus());
+        // Populate other fields as needed
+        return reservationDTO;
     }
 
     @GetMapping

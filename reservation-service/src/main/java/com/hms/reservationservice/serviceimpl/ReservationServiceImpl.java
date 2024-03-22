@@ -1,5 +1,10 @@
 package com.hms.reservationservice.serviceimpl;
 
+import com.hms.reservationservice.client.GuestServiceFeignClient;
+import com.hms.reservationservice.client.RoomServiceFeignClient;
+import com.hms.reservationservice.dto.GuestDTO;
+import com.hms.reservationservice.dto.ReservationDTO;
+import com.hms.reservationservice.dto.RoomDTO;
 import com.hms.reservationservice.entity.Reservation;
 import com.hms.reservationservice.repository.ReservationRepository;
 import com.hms.reservationservice.service.ReservationService;
@@ -15,9 +20,76 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private GuestServiceFeignClient guestServiceFeignClient;
+
+    @Autowired
+    private RoomServiceFeignClient roomServiceFeignClient;
+
     @Override
     public Reservation createReservation(Reservation reservation) {
         return reservationRepository.save(reservation);
+    }
+
+    @Override
+    public ReservationDTO saveReservation(ReservationDTO reservationDTO) {
+        // Check if guest exists, otherwise create
+        GuestDTO guestDTO = reservationDTO.getGuestDTO();
+        if (guestDTO.getId() == null) {
+            guestDTO = createGuest(guestDTO);
+        } else {
+            guestDTO = guestServiceFeignClient.getGuestById(guestDTO.getId());
+        }
+
+        // Check if room exists, otherwise create
+        RoomDTO roomDTO = reservationDTO.getRoomDTO();
+        if (roomDTO.getId() == null) {
+            roomDTO = createRoom(roomDTO);
+        } else {
+            roomDTO = roomServiceFeignClient.getRoomById(roomDTO.getId());
+        }
+
+        // Create Reservation entity
+        Reservation reservation = new Reservation();
+        reservation.setCheckInDate(reservationDTO.getCheckInDate());
+        reservation.setCheckOutDate(reservationDTO.getCheckOutDate());
+        reservation.setNumberOfGuests(reservationDTO.getNumberOfGuests());
+        reservation.setTotalPrice(reservationDTO.getTotalPrice());
+        reservation.setStatus(reservationDTO.getStatus());
+        reservation.setGuestId(guestDTO.getId());
+        reservation.setRoomId(roomDTO.getId());
+
+        // Save the reservation
+        reservation = reservationRepository.save(reservation);
+
+        // Map Reservation entity back to DTO for response
+        return mapReservationToDTO(reservation, guestDTO, roomDTO);
+    }
+
+    // Helper method to map Reservation entity to DTO
+    private ReservationDTO mapReservationToDTO(Reservation reservation, GuestDTO guestDTO, RoomDTO roomDTO) {
+        ReservationDTO reservationDTO = new ReservationDTO();
+        reservationDTO.setId(reservation.getId());
+        reservationDTO.setCheckInDate(reservation.getCheckInDate());
+        reservationDTO.setCheckOutDate(reservation.getCheckOutDate());
+        reservationDTO.setNumberOfGuests(reservation.getNumberOfGuests());
+        reservationDTO.setTotalPrice(reservation.getTotalPrice());
+        reservationDTO.setStatus(reservation.getStatus());
+        reservationDTO.setGuestDTO(guestDTO);
+        reservationDTO.setRoomDTO(roomDTO);
+        return reservationDTO;
+    }
+
+    // Helper method to create room
+    private RoomDTO createRoom(RoomDTO roomDTO) {
+        // Implement the logic to create room using Feign client
+        return roomServiceFeignClient.createRoom(roomDTO);
+    }
+
+    // Helper method to create guest
+    private GuestDTO createGuest(GuestDTO guestDTO) {
+        // Implement the logic to create guest using Feign client
+        return guestServiceFeignClient.createGuest(guestDTO);
     }
 
     @Override
