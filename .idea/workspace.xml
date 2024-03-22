@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca871295-514b-4e61-a2e5-a8fd353b883d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/client/GuestServiceFeignClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/client/RoomServiceFeignClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/dto/GuestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/dto/ReservationDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/dto/RoomDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/reservation-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/ReservationServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/ReservationServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/client/GuestServiceFeignClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/client/GuestServiceFeignClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/client/RoomServiceFeignClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/client/RoomServiceFeignClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/controller/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/controller/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/repository/ReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/repository/ReservationRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/service/ReservationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/serviceimpl/ReservationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation-service/src/main/java/com/hms/reservationservice/serviceimpl/ReservationServiceImpl.java" afterDir="false" />
     </list>

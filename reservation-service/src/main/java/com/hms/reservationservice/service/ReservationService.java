@@ -12,6 +12,8 @@ public interface ReservationService {
 
     ReservationDTO saveReservation(ReservationDTO reservationDTO);
 
+    List<ReservationDTO> getReservationsByGuestId(Long guestId);
+
     List<Reservation> getReservations();
 
     Optional<Reservation> getReservationById(Long id);

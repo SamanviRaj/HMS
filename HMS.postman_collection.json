@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "4eba9ad0-1fd9-4cb0-bd8f-781904dbbc36",
+		"name": "HMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "15590561"
+	},
+	"item": [
+		{
+			"name": "create guest",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"firstName\": \"Johnliver7\",\r\n        \"lastName\": \"Doe2\",\r\n        \"email\": \"john.doe@example2.com\",\r\n        \"phoneNumber\": \"+1234567891\",\r\n        \"address\": \"123 Main St, City, Country\"\r\n    },\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/guests/4"
+			},
+			"response": []
+		},
+		{
+			"name": "get reservations",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"checkInDate\": \"2024-04-02\",\r\n  \"checkOutDate\": \"2024-04-06\",\r\n  \"numberOfGuests\": 3,\r\n  \"totalPrice\": 500.00,\r\n  \"status\": \"pending\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8082/api/reservations/3"
+			},
+			"response": []
+		},
+		{
+			"name": "get rooms",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"roomNumber\": 104,\r\n  \"roomType\": \"Single\",\r\n  \"maxOccupancy\": 2,\r\n  \"price\": 200.00,\r\n  \"description\": \"A cozy single room with a comfortable bed and a small desk.\",\r\n  \"imageUrl\": \"https://example.com/room101.jpg\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8083/api/rooms"
+			},
+			"response": []
+		},
+		{
+			"name": "create reservation for a guest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"guestDTO\": {\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"address\": \"123 Main Street\"\r\n  },\r\n  \"roomDTO\": {\r\n    \"roomNumber\": 101,\r\n    \"roomType\": \"Single\",\r\n    \"maxOccupancy\": 1,\r\n    \"price\": 100.00,\r\n    \"description\": \"Standard Single Room\",\r\n    \"imageUrl\": \"https://example.com/rooms/101.jpg\"\r\n  },\r\n  \"checkInDate\": \"2024-05-01\",\r\n  \"checkOutDate\": \"2024-05-03\",\r\n  \"numberOfGuests\": 1,\r\n  \"totalPrice\": 200.00,\r\n  \"status\": \"Confirmed\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8082/api/reservations/save"
+			},
+			"response": []
+		},
+		{
+			"name": "get Reservations by guest id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8082/api/reservations/guest/1"
+			},
+			"response": []
+		}
+	]
+}

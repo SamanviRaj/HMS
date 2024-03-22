@@ -11,6 +11,7 @@ import com.hms.reservationservice.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,6 +91,36 @@ public class ReservationServiceImpl implements ReservationService {
     private GuestDTO createGuest(GuestDTO guestDTO) {
         // Implement the logic to create guest using Feign client
         return guestServiceFeignClient.createGuest(guestDTO);
+    }
+
+    @Override
+    public List<ReservationDTO> getReservationsByGuestId(Long guestId) {
+        List<Reservation> reservations = reservationRepository.findByGuestId(guestId);
+        List<ReservationDTO> reservationDTOs = new ArrayList<>();
+
+        for (Reservation reservation : reservations) {
+            ReservationDTO reservationDTO = new ReservationDTO();
+            reservationDTO.setId(reservation.getId());
+            reservationDTO.setCheckInDate(reservation.getCheckInDate());
+            reservationDTO.setCheckOutDate(reservation.getCheckOutDate());
+            reservationDTO.setNumberOfGuests(reservation.getNumberOfGuests());
+            reservationDTO.setTotalPrice(reservation.getTotalPrice());
+            reservationDTO.setStatus(reservation.getStatus());
+
+            // Fetch guest details using Feign client
+            GuestDTO guestDTO = guestServiceFeignClient.getGuestById(reservation.getGuestId());
+
+            // Fetch room details using Feign client
+            RoomDTO roomDTO = roomServiceFeignClient.getRoomById(reservation.getRoomId());
+
+            // Set guest and room details in reservation DTO
+            reservationDTO.setGuestDTO(guestDTO);
+            reservationDTO.setRoomDTO(roomDTO);
+
+            reservationDTOs.add(reservationDTO);
+        }
+
+        return reservationDTOs;
     }
 
     @Override

@@ -36,6 +36,11 @@ public class ReservationController {
         return new ResponseEntity<>(savedReservation, HttpStatus.CREATED);
     }
 
+    @GetMapping("/guest/{guestId}")
+    public ResponseEntity<List<ReservationDTO>> getReservationsByGuestId(@PathVariable Long guestId) {
+        List<ReservationDTO> reservations = reservationService.getReservationsByGuestId(guestId);
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
 
 // Method to convert ReservationDTO to Reservation entity
     private Reservation convertToReservationEntity(ReservationDTO reservationDTO) {

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient(name = "room-service", url = "${room-service.url}")
 public interface RoomServiceFeignClient {
 
-    @GetMapping("/rooms/{id}")
+    @GetMapping("/api/rooms/{id}")
     RoomDTO getRoomById(@PathVariable("id") Long id);
 
     @PostMapping("/api/rooms")
