@@ -1,5 +1,5 @@
 spring:
   application:
-    name: RESERVATION-SERVICE
+    name: api-gateway
   config:
     import: configserver:http://localhost:8888
